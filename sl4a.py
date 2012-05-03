@@ -15,6 +15,7 @@
 __author__ = 'Damon Kohler <damonkohler@gmail.com>'
 
 import collections
+import fix_json
 import json
 import os
 import socket
