@@ -38,7 +38,7 @@ def main():
     parser.add_option("--server",  action="store_true", default=False, dest="start_server", help="Run the test webserver.")
     (options, args) = parser.parse_args()
     
-    elif options.reset_db or options.start_server:
+    if options.reset_db or options.start_server:
         # Setup the application and database
         app = Flask(__name__.split('.')[0])
         app.config.from_object(config.FlaskConfig)
