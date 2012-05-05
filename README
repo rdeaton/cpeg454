@@ -1,0 +1,6 @@
+- Have SL4A installed on phone first
+- For development on your laptop, first start a private server on port 8081
+    - Run adb shell
+      - am start -a com.googlecode.android_scripting.action.LAUNCH_SERVER -n com.googlecode.android_scripting/.activity.ScriptingLayerServiceLauncher --ei com.googlecode.android_scripting.extra.USE_SERVICE_PORT 8081
+    - Forward port 8081 to a port on localhost
+      - adb forward tcp:8081 tcp:8081
