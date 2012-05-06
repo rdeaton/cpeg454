@@ -13,7 +13,7 @@ Tables:
         datetime
         GPS location
         AP - foreign key
-        sig_strength
+        signal
         performance
 
     AP:
@@ -33,7 +33,8 @@ class Checkin(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     ap_bssid = db.Column(db.String(12), db.ForeignKey('ap.bssid'), primary_key=True)
-    sig_strength = db.Column(db.Integer)
+    ssid = db.Column(db.String(50), db.ForeignKey('network.ssid'), primary_key=True)
+    signal = db.Column(db.Integer)
     performance = db.Column(db.Integer)
 
     def __repr__(self):
@@ -43,7 +44,7 @@ class Checkin(db.Model):
 class AP(db.Model):
     __tablename__ = 'ap'
     bssid = db.Column(db.String(12), primary_key=True)
-    _ssid = db.Column(db.String(20), primary_key=True)
+    _ssid = db.Column(db.String(50), db.ForeignKey('network.ssid'), primary_key=True)
 
     checkins = db.relationship('Checkin', backref='ap')
 
@@ -56,7 +57,25 @@ class AP(db.Model):
         self._bssid = str(value)[:20]
 
     def __repr__(self):
-        return '<AP %s, %s>' % (str(self.bssid), str(self.ssid))
+        return '<AP %s, %s>' % (str(self.bssid), str(self._ssid))
+
+class Network(db.Model):
+    __tablename__ = 'network'
+    _ssid = db.Column(db.String(50), db.ForeignKey('network.ssid'), primary_key=True)
+    
+    APs = db.relationship('AP', backref='network')
+    checkins = db.relationship('Checkin', backref='network')
+
+    @property
+    def ssid(self):
+        return self._ssid
+
+    @ssid.setter
+    def ssid(self, value):
+        self._bssid = str(value)[:50]
+
+    def __repr__(self):
+        return '<Network %s>' % str(self._ssid) 
 
 class Phone(db.Model):
     __tablename__ = 'phone'
