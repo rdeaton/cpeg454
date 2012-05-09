@@ -9,8 +9,8 @@ def eventloop():
             id=event["data"]["id"]
 	    if id=="openScanSlider":
                 #create the seek bar with the current value in for the start value
-                print droid.fullQueryDetail("currentScanInterval")
-	        droid.dialogCreateSeekBar(10,100,"Scan Interval","How many seconds should the phone wait in between WiFi Scans?  A smaller interval will decrease battery life but increase data collection.")
+                current = droid.fullQueryDetail("currentScanInterval").result['text']
+	        droid.dialogCreateSeekBar(str(current),100,"Scan Interval","How many seconds should the phone wait in between WiFi Scans?  A smaller interval will decrease battery life but increase data collection.")
                 droid.dialogSetPositiveButtonText("Update Interval")
                 droid.dialogShow()
                 sliderResp = droid.dialogGetResponse().result
@@ -21,7 +21,8 @@ def eventloop():
                 droid.fullSetProperty("currentScanInterval", "text", str(currentSliderValue))
             if id=="openThroughputSlider":
                 #create the seek bar with the current value in for the start value
-	        droid.dialogCreateSeekBar(10,100,"Throughput Interval","How many seconds should the phone wait in between throughput tests?  A smaller interval will decrease battery life but increase data collection.")
+                current = droid.fullQueryDetail("currentThroughputInterval").result['text']
+	        droid.dialogCreateSeekBar(str(current),100,"Throughput Interval","How many seconds should the phone wait in between throughput tests?  A smaller interval will decrease battery life but increase data collection.")
                 droid.dialogSetPositiveButtonText("Update Interval")
                 droid.dialogShow()
                 sliderResp = droid.dialogGetResponse().result
@@ -30,6 +31,19 @@ def eventloop():
                 #data = event['data']
                 #number = data['progress']
                 droid.fullSetProperty("currentThroughputInterval", "text", str(currentSliderValue))
+            if id=="minimumBattery":
+                #create the seek bar with the current value in for the start value
+                current = droid.fullQueryDetail("currentMinimumBattery").result['text']
+	        droid.dialogCreateSeekBar(str(current),100,"Minimum Battery Level","This app can be configured to stop scanning when battery level is below a certain level.  Choose the minimum battery level.")
+                droid.dialogSetPositiveButtonText("Update Minimum battery level")
+                droid.dialogShow()
+                sliderResp = droid.dialogGetResponse().result
+                currentSliderValue = sliderResp['progress']
+                #event=droid.eventWait().result
+                #data = event['data']
+                #number = data['progress']
+                droid.fullSetProperty("currentMinimumBattery", "text", str(currentSliderValue))
+                
             if id=="exitButton":
                 return
             elif id=="button2":
@@ -70,13 +84,36 @@ layout="""<?xml version="1.0" encoding="utf-8"?>
                     android:id="@+id/currentThroughputInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
         </LinearLayout>
 
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
+	    <Button android:id="@+id/minimumBattery" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="Minimum Battery Level"></Button>            
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="20"
+                    android:id="@+id/currentMinimumBattery" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
+	    <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="none"
+                    android:id="@+id/currentNetworkSSID" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
+
 
 		 
 </LinearLayout>
 """
 droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
+
+
 #print layout
 print droid.fullShow(layout)
+
+
+#set the current wifi network at application start
+droid.fullSetProperty("currentNetworkSSID", "text", "Current WiFi Network SSID: " + droid.wifiGetConnectionInfo().result['ssid'])
+
+
+
 eventloop()
 #print droid.fullQuery()
 #print "Data entered =",droid.fullQueryDetail("editText1").result
