@@ -1,0 +1,23 @@
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes.dex : \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/BuildConfig.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/DialogActivity$1.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/DialogActivity.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R$attr.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R$drawable.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R$id.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R$layout.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R$raw.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R$string.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/R.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/Script.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/ScriptActivity$1.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/ScriptActivity.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/ScriptApplication.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/ScriptService$1.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/ScriptService$LocalBinder.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/bin/classes/edu/udel/clairvoyance/ScriptService.class \
+/Users/rdeaton/dev/cpeg454/clairvoyance/libs/locale_platform.jar \
+/Users/rdeaton/dev/android/android-sdk-macosx/tools/support/annotations.jar \
+/Users/rdeaton/dev/cpeg454/clairvoyance/libs/guava-r06.jar \
+/Users/rdeaton/dev/cpeg454/clairvoyance/libs/libGoogleAnalytics.jar \
+/Users/rdeaton/dev/cpeg454/clairvoyance/libs/script.jar \
