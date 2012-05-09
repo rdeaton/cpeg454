@@ -8,6 +8,8 @@ def eventloop():
         if event["name"]=="click":
             id=event["data"]["id"]
 	    if id=="openScanSlider":
+                #create the seek bar with the current value in for the start value
+                print droid.fullQueryDetail("currentScanInterval")
 	        droid.dialogCreateSeekBar(10,100,"Scan Interval","How many seconds should the phone wait in between WiFi Scans?  A smaller interval will decrease battery life but increase data collection.")
                 droid.dialogSetPositiveButtonText("Update Interval")
                 droid.dialogShow()
@@ -18,6 +20,7 @@ def eventloop():
                 #number = data['progress']
                 droid.fullSetProperty("currentScanInterval", "text", str(currentSliderValue))
             if id=="openThroughputSlider":
+                #create the seek bar with the current value in for the start value
 	        droid.dialogCreateSeekBar(10,100,"Throughput Interval","How many seconds should the phone wait in between throughput tests?  A smaller interval will decrease battery life but increase data collection.")
                 droid.dialogSetPositiveButtonText("Update Interval")
                 droid.dialogShow()
@@ -37,6 +40,9 @@ def eventloop():
             elif event["name"]=="screen":
                 if event["data"]=="destroy":
                     return
+        elif event["name"] == "EXIT_APP":
+            return
+            
 
 print "Started"
 layout="""<?xml version="1.0" encoding="utf-8"?>
@@ -51,7 +57,7 @@ layout="""<?xml version="1.0" encoding="utf-8"?>
 	    <Button android:id="@+id/openScanSlider" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="Change Scan Interval"></Button>            
             <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:text="Value not yet set"
+                    android:layout_height="wrap_content" android:text="20"
                     android:id="@+id/currentScanInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
         </LinearLayout>
 
@@ -60,18 +66,15 @@ layout="""<?xml version="1.0" encoding="utf-8"?>
 	    <Button android:id="@+id/openThroughputSlider" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="Change Throughput Test Interval"></Button>            
             <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:text="Value not yet set"
+                    android:layout_height="wrap_content" android:text="30"
                     android:id="@+id/currentThroughputInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
-            <Button android:id="@+id/exitButton" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:layout_gravity="center|fill_horizontal" android:text="Exit Application"></Button>
-        </LinearLayout>
 
 		 
 </LinearLayout>
 """
+droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
 #print layout
 print droid.fullShow(layout)
 eventloop()
