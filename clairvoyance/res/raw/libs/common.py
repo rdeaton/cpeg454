@@ -2,6 +2,9 @@
 droid = None
 # Holds the path to the base directory
 path = ''
+# DNS name of server to report to (no HTTP, url, etc)
+server='localhost:5050'
+
 # Holds the current state of the GPS sensor
 gps_enabled = None
 
@@ -44,3 +47,4 @@ def try_to_enable_gps(prompt = True):
             droid.stopLocating()
             gps_enabled = True
             return True
+

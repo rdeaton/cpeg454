@@ -1,15 +1,15 @@
 # Example configuration file. Copy to config.py in the current or parent directory
 
 # Uncomment this for the database type
-# db_type = 'mysql'
+db_type = 'mysql'
+#db_type = 'sqlite'
 htpath = '.'
-db_type = 'sqlite'
 
 sqlite_file = 'db.sqlite'
 
 mysql = {}
 mysql['user']    = 'wifimap'
-mysql['pass']    = 'not_password'
+mysql['pass']    = 'supersecret'
 mysql['host']    = 'localhost'
 mysql['port']    = '3306'
 mysql['db']      = 'wifimap'

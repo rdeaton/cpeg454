@@ -28,7 +28,7 @@ Tables:
 
 class Checkin(db.Model):
     __tablename__ = 'checkin'
-    phone_id = db.Column(db.String(100), primary_key=True)
+    phone_id = db.Column(db.String(100), db.ForeignKey('phone.id'), primary_key=True)
     datetime = db.Column(db.DateTime, primary_key=True)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
@@ -44,9 +44,14 @@ class Checkin(db.Model):
 class AP(db.Model):
     __tablename__ = 'ap'
     bssid = db.Column(db.String(12), primary_key=True)
-    _ssid = db.Column(db.String(50), db.ForeignKey('network.ssid'), primary_key=True)
+    _ssid = db.Column(db.String(50), db.ForeignKey('network.ssid'), name='ssid', primary_key=True)
 
     checkins = db.relationship('Checkin', backref='ap')
+
+    def __init__(self, bssid, ssid):
+        db.Model.__init__(self)
+        self.bssid = bssid
+        self.ssid = ssid
 
     @property
     def ssid(self):
@@ -54,17 +59,21 @@ class AP(db.Model):
 
     @ssid.setter
     def ssid(self, value):
-        self._bssid = str(value)[:20]
+        self._ssid = str(value)[:20]
 
     def __repr__(self):
         return '<AP %s, %s>' % (str(self.bssid), str(self._ssid))
 
 class Network(db.Model):
     __tablename__ = 'network'
-    _ssid = db.Column(db.String(50), db.ForeignKey('network.ssid'), primary_key=True)
+    _ssid = db.Column(db.String(50), name='ssid', primary_key=True)
     
     APs = db.relationship('AP', backref='network')
     checkins = db.relationship('Checkin', backref='network')
+    
+    def __init__(self, ssid):
+        db.Model.__init__(self)
+        self.ssid = ssid
 
     @property
     def ssid(self):
@@ -72,7 +81,7 @@ class Network(db.Model):
 
     @ssid.setter
     def ssid(self, value):
-        self._bssid = str(value)[:50]
+        self._ssid = str(value)[:50]
 
     def __repr__(self):
         return '<Network %s>' % str(self._ssid) 
@@ -80,6 +89,7 @@ class Network(db.Model):
 class Phone(db.Model):
     __tablename__ = 'phone'
     id = db.Column(db.String(36), primary_key=True)
+    #checkins = db.relationship('Checkin', backref='phone', primaryjoin='id==Checkin.phone_id')
     checkins = db.relationship('Checkin', backref='phone')
 
     @property

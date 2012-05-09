@@ -1,6 +1,6 @@
 from wifimap import app, db, database
-from wifimap.database import Checkin, AP, Phone
-from flask import request, jsonify, json
+from wifimap.database import Checkin, AP, Phone, Network
+from flask import request, jsonify, json, make_response
 
 """
 checkin format
@@ -9,6 +9,7 @@ checkin format
     'datetime' : <checkin date/time as datetime.datetime.isoformat()>,
     'latitude' : <checkin lat>,
     'longitude' : <checkin long>,
+    'ssid' : <ssid of network>,
     'bssid' : <bssid of AP, 12 chars max, no colons>,
     'signal' : <signal strength, integer>,
     'performance' : <whatever performance metric we use, integer>
@@ -31,17 +32,24 @@ def verify_entry(checkin):
 
 @app.route('/api/checkin/', methods=['GET', 'POST'])
 def api_check_in():
-    entries = request.json()
+    entries = json.loads(request.form.get('json', None))
     failed = 0
+    #print entries
     for e in entries:
+        print e
         if verify_entry(e):
             db.session.add(Checkin(
                     phone_id=e['phone_id'], datetime=e['datetime'],
                     latitude=e['latitude'], longitude=e['longitude'],
                     ap_bssid=e['bssid'], signal=e['signal'], 
                     performance=e['performance']))
+
             if AP.query.filter_by(bssid=e['bssid']) is not None:
                 db.session.add(AP(bssid=e['bssid'], ssid=e['ssid']))
+            
+            if Network.query.filter_by(_ssid=e['ssid']) is not None:
+                db.session.add(Network(ssid=e['ssid']))
+            
             if Phone.query.filter_by(id=e['phone_id']) is not None:
                 db.session.add(Phone(id=e['phone_id']))
         else:
@@ -64,15 +72,19 @@ def get_checkins_near_time(time, mins, ssid):
         # TODO: currently, return all checkins for debug purposes
         return Checkin.query.filter(Checkin.ssid.like(ssid)).all()
 
-
-@app.route('/api/render/', methods=['GET'])
+@app.route('/api/render/', methods=['GET', 'POST'])
 def api_send_render():
-    target_time = request.json()['datetime']
-    ssid = request.json()['datetime']
+    print request.form.get('json', None)
+    target_time = json.loads(request.form.get('json', None))['datetime']
+    ssid= json.loads(request.form.get('json', None))['ssid']
+    #target_time = request.json['datetime']
+    #ssid = request.json['datetime']
     entries = []
     for c in get_checkins_near_time(target_time, 10, ssid):
         entries.append({'latitude' : c.latitude, 'longitude' : c.longitude,
                         'ssid' : c.ssid,'signal_strength' : c.signal, 
                         'performance' : c.performance})
-    return jsonify(entries)
+    #return jsonify(entries)
+    print json.dumps(entries)
+    return make_response(json.dumps(entries))
 

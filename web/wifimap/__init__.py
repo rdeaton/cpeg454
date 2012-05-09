@@ -49,7 +49,7 @@ def main():
         if options.reset_db:
             db.drop_all()
             db.create_all()
-            dataset.populate()
+            #dataset.populate()
             print 'Database reset.'
             exit(0)
         import pages
