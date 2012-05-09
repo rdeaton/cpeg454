@@ -5,7 +5,7 @@ path = ''
 # Holds the current state of the GPS sensor
 gps_enabled = None
 
-def try_to_enable_gps(prompt = False):
+def try_to_enable_gps(prompt = True):
     """
     Attempts to enable the GPS sensor. If prompt is false, it will pull up the
     settings pane without asking if GPS is off on the first attempt to enable.
@@ -27,17 +27,19 @@ def try_to_enable_gps(prompt = False):
                 droid.dialogSetPositiveButtonText("Yes")
                 droid.dialogSetNegativeButtonText("No")
                 droid.dialogShow()
+                response = droid.dialogGetResponse().result
+                if 'which' in response and response['which'] == 'positive':
+                    intent = droid.makeIntent(None, None, None, None, None, "com.android.settings", "com.android.settings.SecuritySettings", 0).result
+                    droid.startActivityForResultIntent(intent)
+                else:
+                    droid.stopLocating()
+                    gps_enabled = False
+                    return False
             else:
-                prompt = True
-        
-            response = droid.dialogGetResponse().result
-            if 'which' in response and response['which'] == 'positive':
                 intent = droid.makeIntent(None, None, None, None, None, "com.android.settings", "com.android.settings.SecuritySettings", 0).result
                 droid.startActivityForResultIntent(intent)
-            else:
-                droid.stopLocating()
-                gps_enabled = False
-                return False
+                prompt = True
+        
         else:
             droid.stopLocating()
             gps_enabled = True
