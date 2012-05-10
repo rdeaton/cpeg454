@@ -28,9 +28,8 @@ if __name__ == '__main__':
     common.droid = droid
     common.path = path
     
-    common.try_to_enable_gps()
-    
-    
+    # Turn on GPS at app startup
+    common.gps_lock()
     
     layout = open(os.path.join(path, 'layouts', 'main.xml'), 'r').read()
     droid.fullShow(layout)
