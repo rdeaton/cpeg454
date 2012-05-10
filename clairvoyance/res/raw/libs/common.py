@@ -1,3 +1,5 @@
+import os
+
 # Holds the instance of the Android object
 droid = None
 # Holds the path to the base directory
@@ -6,6 +8,13 @@ path = ''
 server='localhost:5050'
 gps_locked = False
 
+views = {}
+
+def load_views():
+    for f in os.listdir(os.path.join(path, 'layouts')):
+        if f[-3:] == '.py' and f != "__init__.py":
+            views[f[:-3]] = __import__('layouts.' + f[:-3], fromlist=["*"])
+    
 def gps_is_enabled():
     if 'gps' not in droid.locationProviders().result:
         # Wat? No GPS?
@@ -47,12 +56,10 @@ def gps_lock(prompt = True):
     droid.startLocating()
     count = 0
     while count < 2:
-        print count
         droid.eventWaitFor('location', 15000)
         droid.eventClearBuffer()
     
         location = droid.readLocation().result
-        print location
         if location == {} or 'gps' not in location:
             count += 1
         else:
