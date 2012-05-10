@@ -36,6 +36,7 @@ def main():
     parser = OptionParser()
     parser.add_option("-r", "--reset-db", action="store_true", default=False, dest="reset_db", help="Reset the database.")
     parser.add_option("--server",  action="store_true", default=False, dest="start_server", help="Run the test webserver.")
+    parser.add_option("--shell", action="store_true", dest="shell", default=False)
     (options, args) = parser.parse_args()
     
     if options.reset_db or options.start_server:
@@ -54,6 +55,10 @@ def main():
             exit(0)
         import pages
         app.run(host='0.0.0.0', port=config.dev_port, use_reloader=True)
+    elif options.shell:
+        app = Flask(__name__.split('.')[0])
+        app.config.from_object(config.FlaskConfig)
+        db = SQLAlchemy(app)
     else:
         parser.print_help()
         
