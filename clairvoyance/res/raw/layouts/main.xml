@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#cacaca"
-    android:orientation="vertical" >
-    <TextView
-        android:id="textview1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#aa0000"
-        android:textSize="15pt"
-        android:textColor="#aaaa00"
-        android:text="Clairvoyance" />
+        android:id="@+id/background"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:background="#ff000000">
+
+
+        <CheckBox android:layout_height="wrap_content" android:id="@+id/scanEnable" android:layout_width="234dp" android:text="Enable Scan Tests?" android:checked="true"></CheckBox>   
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+	    <Button android:id="@+id/openScanSlider" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="Change Scan Interval"></Button>            
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="20"
+                    android:id="@+id/currentScanInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
+        </LinearLayout>
+
+        <CheckBox android:layout_height="wrap_content" android:id="@+id/throughputEnable" android:layout_width="234dp" android:text="Enable Throughput Tests?" android:checked="true"></CheckBox>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
+	    <Button android:id="@+id/openThroughputSlider" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="Change Throughput Test Interval"></Button>            
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="30"
+                    android:id="@+id/currentThroughputInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
+	    <Button android:id="@+id/minimumBattery" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="Minimum Battery Level"></Button>            
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="20"
+                    android:id="@+id/currentMinimumBattery" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
+	    <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="none"
+                    android:id="@+id/currentNetworkSSID" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
 </LinearLayout>
