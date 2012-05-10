@@ -110,7 +110,12 @@ print droid.fullShow(layout)
 
 
 #set the current wifi network at application start
-droid.fullSetProperty("currentNetworkSSID", "text", "Current WiFi Network SSID: " + droid.wifiGetConnectionInfo().result['ssid'])
+info = droid.wifiGetConnectionInfo().result
+print info
+if 'ssid' in info.keys():
+    droid.fullSetProperty("currentNetworkSSID", "text", "Current WiFi Network SSID: " + droid.wifiGetConnectionInfo().result['ssid'])
+else:
+    droid.fullSetProperty("currentNetworkSSID", "text", "Current WiFi Network SSID: NOT CONNECTED or CARD DISABLED")
 
 
 
