@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="android_rules" default="debug">
+
+    <target name="-pre-build">
+        <zip destfile="res/raw/support.zip">
+            <zipfileset dir="res/raw/layouts" prefix="layouts" />
+            <zipfileset dir="res/raw/libs" prefix="libs" />
+        </zip>
+    </target>
+</project>
