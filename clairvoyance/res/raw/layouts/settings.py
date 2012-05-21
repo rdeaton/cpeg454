@@ -25,6 +25,7 @@ def open_view():
         settings = json.loads(prefs)
     save_settings() # Updates the UI, and places the defaults in the keystore if nothing was loaded
     
+    droid.addOptionsMenuItem("Save Settings","SAVE_SETTINGS",None,"star_on")    
     droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
     info = droid.wifiGetConnectionInfo().result
     if 'ssid' in info.keys():
@@ -71,11 +72,25 @@ def handle_event(event):
             settings['minimum_battery'] = sliderResp['progress']
             save_settings()
             return manager.EVENT_CONSUME
+    elif event["name"] == "key":
+        id = event["data"]["key"]
+        #BACK_BUTTON = '4'
+        if id == '4':
+            #the back button was pressed
+            print "BACK BUTTON PRESSED!!!"
+            manager.pop_view();
     elif event["name"]=="screen":
         if event["data"]=="destroy":
-            manager.close_app()
-            return manager.EVENT_CONSUME
+            pass
+            #manager.close_app()
+            #return manager.EVENT_CONSUME
     elif event["name"] == "EXIT_APP":
         manager.close_app()
-    
+    elif event["name"] == "SAVE_SETTINGS":
+        save_settings()
+    else:
+        print "XX" + event["name"] + "XX"
+        print type(event["name"])
+        print event["data"]["key"]
+        print type(event["data"]["key"])
     return manager.EVENT_UNUSED

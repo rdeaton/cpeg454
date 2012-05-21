@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/background"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:background="#ff000000">
+
+
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+	    <Button android:id="@+id/collectData" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="Start Collecting"></Button>            
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
+	    <Button android:id="@+id/changeSettings" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="Change Settings"></Button>            
+            
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
+	    <Button android:id="@+id/viewMaps" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="View Coverage Maps"></Button>            
+            
+        </LinearLayout>
+
+</LinearLayout>
