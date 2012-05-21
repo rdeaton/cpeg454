@@ -33,6 +33,10 @@ def pop_view():
     views.pop()
     if len(views) == 0:
         exit()
+    else:
+        print 'blah'
+        views[-1].open_view()
+        event_handlers.append(views[-1].handle_event)
 
 def swap_view(view):
     if len(views) == 0:

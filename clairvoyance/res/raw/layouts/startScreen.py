@@ -43,8 +43,7 @@ def handle_event(event):
             
     elif event["name"]=="screen":
         if event["data"]=="destroy":
-            print "CLOSEAPP!!"
-            manager.close_app()
+            # manager.close_app()
             return manager.EVENT_CONSUME
     elif event["name"] == "EXIT_APP":
         manager.close_app()
