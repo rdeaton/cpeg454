@@ -24,7 +24,7 @@ def open_view():
     if prefs is not None:
         settings = json.loads(prefs)
     save_settings() # Updates the UI, and places the defaults in the keystore if nothing was loaded
-    
+    droid.clearOptionsMenu()
     droid.addOptionsMenuItem("Save Settings","SAVE_SETTINGS",None,"star_on")    
     droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
     info = droid.wifiGetConnectionInfo().result

@@ -18,7 +18,7 @@ def open_view():
     prefs = droid.prefGetValue('settings', 'clairvoyance').result
     if prefs is not None:
         settings = json.loads(prefs)
-    
+    droid.clearOptionsMenu()
     droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
     
 
