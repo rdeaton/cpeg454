@@ -28,5 +28,7 @@
                     android:layout_height="wrap_content" android:text="About/Help"></Button>            
             
         </LinearLayout>
+        
+        
 
 </LinearLayout>

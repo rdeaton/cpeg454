@@ -36,7 +36,7 @@ def handle_event(event):
     if event["name"]=="click":
         id = event["data"]["id"]
         if id == "collectData":
-            pass
+            manager.push_view(common.views['collectData'])
         elif id == "viewMaps":
             pass
         elif id == "changeSettings":

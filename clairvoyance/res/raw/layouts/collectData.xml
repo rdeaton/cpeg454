@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/background"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:background="#ff000000">
+
+
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+           
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="20"
+                    android:id="@+id/scanInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
+
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">           
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="30"
+                    android:id="@+id/throughputInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
+           
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="20"
+                    android:id="@+id/minimumBattery" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
+          
+            <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="30"
+                    android:id="@+id/bufferSize" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
+	    <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="none"
+                    android:id="@+id/currentNetworkSSID" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+        </LinearLayout>
+        
+        
+
+</LinearLayout>
