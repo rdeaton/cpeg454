@@ -44,6 +44,7 @@ def open_view():
 
     handle_event.bufferCounter = 0
     handle_event.location = []
+    handle_event.JSON_sends = 0
 
 def close_view():
     droid.fullDismiss()
@@ -80,14 +81,23 @@ def handle_event(event):
         loc_data = droid.readLocation().result
         myLat = loc_data['gps']['latitude']
         myLong = loc_data['gps']['longitude']
+        accuracy = loc_data['gps']['accuracy']
         myID = droid.getDeviceId().result
         networks = droid.wifiGetScanResults().result
         if networks != None:
             for singleNetwork in networks:
                 handle_event.bufferCounter = handle_event.bufferCounter + 1
-                handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = None))
+                handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = accuracy))
             
-        droid.fullSetProperty("status", "text", "Number of reads: " + str(handle_event.bufferCounter))
+        settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)    
+        if (handle_event.bufferCounter >= settings['buffer_size']):
+            checkin.send_checkins(handle_event.location)
+            handle_event.location = []
+            handle_event.bufferCounter = 0
+            handle_event.JSON_sends += 1
+        
+        droid.fullSetProperty("status", "text", "Number of reads: " + str(handle_event.bufferCounter) + " Number of JSON sends:" + handle_event.JSON_sends )
+      
         return manager.EVENT_USED
     else:
         return manager.EVENT_UNUSED
