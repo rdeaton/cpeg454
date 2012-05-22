@@ -40,6 +40,8 @@ def handle_event(event):
             pass
         elif id == "changeSettings":
             manager.push_view(common.views['settings'])
+        elif id == "viewAbout":
+            manager.push_view(common.views['about'])
             
     elif event["name"]=="screen":
         if event["data"]=="destroy":
