@@ -38,7 +38,7 @@ def gps_prompt():
     else:
         return False
 
-def gps_lock(prompt = True):
+def gps_lock(prompt = True, mSecondsToWaitOnLock = 30000, minUpdateDistance = 30):
     """
     Attempts to enable the GPS sensor. If prompt is false, it will pull up the
     settings pane without asking if GPS is off on the first attempt to enable.
@@ -53,7 +53,7 @@ def gps_lock(prompt = True):
     # Let's make sure GPS is on
     droid.dialogCreateSpinnerProgress("Clairvoyance", "Waiting for GPS...")
     droid.dialogShow()
-    droid.startLocating()
+    droid.startLocating(minDistance = mSecondsToWaitOnLock, minUpdateDistance = minUpdateDistance)
     count = 0
     while count < 2:
         droid.eventWaitFor('location', 15000)
