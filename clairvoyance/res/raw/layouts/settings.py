@@ -50,7 +50,7 @@ def handle_event(event):
             print settings
             print type(settings)
             print settings['scan_interval']
-            droid.dialogCreateSeekBar(settings['scan_interval'], 100, "Scan Interval", "How many seconds should the phone wait in between WiFi Scans?  A smaller interval will decrease battery life but increase data collection.")
+            droid.dialogCreateSeekBar(settings['scan_interval'], 50, "Scan Interval", "How many seconds should the phone wait in between WiFi Scans?  A smaller interval will decrease battery life but increase data collection.")
             droid.dialogSetPositiveButtonText("Update Interval")
             droid.dialogShow()
             sliderResp = droid.dialogGetResponse().result
@@ -60,7 +60,7 @@ def handle_event(event):
             save_settings()
             return manager.EVENT_CONSUME
         elif id == "openThroughputSlider":
-            droid.dialogCreateSeekBar(str(settings['throughput_interval']), 100, "Throughput Interval", "How many seconds should the phone wait in between throughput tests?  A smaller interval will decrease battery life but increase data collection.")
+            droid.dialogCreateSeekBar(str(settings['throughput_interval']), 50, "Throughput Interval", "How many seconds should the phone wait in between throughput tests?  A smaller interval will decrease battery life but increase data collection.")
             droid.dialogSetPositiveButtonText("Update Interval")
             droid.dialogShow()
             sliderResp = droid.dialogGetResponse().result
@@ -80,7 +80,7 @@ def handle_event(event):
             save_settings()
             return manager.EVENT_CONSUME
         elif id == "bufferSizeSlider":
-              droid.dialogCreateSeekBar(str(settings['buffer_size']), 50, "Buffer Size", "How often should the app send its collected data to the server?  Decreasing this size will send data to the server more often (though the same amount of total data will be sent).")
+              droid.dialogCreateSeekBar(str(settings['buffer_size']), 20, "Buffer Size", "How often should the app send its collected data to the server?  Decreasing this size will send data to the server more often (though the same amount of total data will be sent).")
               droid.dialogSetPositiveButtonText("Update Buffer Size")
               droid.dialogShow()
               sliderResp = droid.dialogGetResponse().result

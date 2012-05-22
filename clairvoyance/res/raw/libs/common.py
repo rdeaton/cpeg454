@@ -53,7 +53,7 @@ def gps_lock(prompt = True, mSecondsToWaitOnLock = 30000, minUpdateDistance = 30
     # Let's make sure GPS is on
     droid.dialogCreateSpinnerProgress("Clairvoyance", "Waiting for GPS...")
     droid.dialogShow()
-    droid.startLocating(minDistance = mSecondsToWaitOnLock, minUpdateDistance = minUpdateDistance)
+    droid.startLocating(mSecondsToWaitOnLock, minUpdateDistance)
     count = 0
     while count < 2:
         droid.eventWaitFor('location', 15000)
