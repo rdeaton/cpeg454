@@ -44,13 +44,13 @@ def api_check_in():
                     ap_bssid=e['bssid'], ssid=e['ssid'], signal=e['signal'], 
                     performance=e['performance']))
 
-            if AP.query.filter_by(bssid=e['bssid']) is not None:
+            if AP.query.filter_by(bssid=e['bssid']).all() is not None:
                 db.session.add(AP(bssid=e['bssid'], ssid=e['ssid']))
             
-            if Network.query.filter_by(_ssid=e['ssid']) is not None:
+            if Network.query.filter_by(_ssid=e['ssid']).all() is not None:
                 db.session.add(Network(ssid=e['ssid']))
             
-            if Phone.query.filter_by(id=e['phone_id']) is not None:
+            if Phone.query.filter_by(id=e['phone_id']).all() is not None:
                 db.session.add(Phone(id=e['phone_id']))
         else:
             failed += 1
