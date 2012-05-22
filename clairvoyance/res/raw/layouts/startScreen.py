@@ -9,6 +9,7 @@ def open_view():
   
     layout = open(os.path.join(common.path, 'layouts', 'startScreen.xml'), 'r').read()
     droid.fullShow(layout)
+    droid.fullSetProperty("mainLogo", "src", 'file:///' + os.path.join(common.path, 'layouts', 'image.png'))
     
     prefs = droid.prefGetValue('settings', 'clairvoyance').result
     if prefs is not None:
