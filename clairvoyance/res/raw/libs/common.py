@@ -5,7 +5,7 @@ droid = None
 # Holds the path to the base directory
 path = ''
 # DNS name of server to report to (no HTTP, url, etc)
-server='localhost:5050'
+server='107.20.202.68:5050'
 gps_locked = False
 
 views = {}
@@ -53,7 +53,7 @@ def gps_lock(prompt = True, mSecondsToWaitOnLock = 30000, minUpdateDistance = 30
     # Let's make sure GPS is on
     droid.dialogCreateSpinnerProgress("Clairvoyance", "Waiting for GPS...")
     droid.dialogShow()
-    droid.startLocating(minDistance = mSecondsToWaitOnLock, minUpdateDistance = minUpdateDistance)
+    droid.startLocating(mSecondsToWaitOnLock, minUpdateDistance)
     count = 0
     while count < 2:
         droid.eventWaitFor('location', 15000)

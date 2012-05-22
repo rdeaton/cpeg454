@@ -43,5 +43,23 @@
         </LinearLayout>
         
         
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout6">
+	    <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="Current Status:"
+                    android:id="@+id/statusTitle" android:textSize="20sp" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+                    
+        </LinearLayout>
+        
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout7">
+	    <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:text="not assigned"
+                    android:id="@+id/status" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
+                    
+        </LinearLayout>
+        
+        
+        
+        
 
 </LinearLayout>

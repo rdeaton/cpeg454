@@ -4,17 +4,18 @@ import os
 import json
 from common import droid
 
-settings = {
-     'scan_interval' : 60,
-     'throughput_interval' : 60,
-     'minimum_battery' : 15,
-     'buffer_size' : 5}
+
+
 
 
 def open_view():
-    global settings
+  
     layout = open(os.path.join(common.path, 'layouts', 'startScreen.xml'), 'r').read()
     droid.fullShow(layout)
+    droid.fullSetProperty("collectIcon", "src", 'file:///' + os.path.join(common.path, 'layouts', 'icons', 'collectIcon.png'))
+    droid.fullSetProperty("settingsIcon", "src", 'file:///' + os.path.join(common.path, 'layouts', 'icons', 'settingsIcon.png'))
+    droid.fullSetProperty("mapIcon", "src", 'file:///' + os.path.join(common.path,  'layouts', 'icons', 'mapIcon.png'))
+    droid.fullSetProperty("aboutIcon", "src", 'file:///' + os.path.join(common.path, 'layouts', 'icons',  'aboutIcon.png'))
     
     prefs = droid.prefGetValue('settings', 'clairvoyance').result
     if prefs is not None:
@@ -35,13 +36,13 @@ def handle_event(event):
     """
     if event["name"]=="click":
         id = event["data"]["id"]
-        if id == "collectData":
+        if id == "collectIcon":
             manager.push_view(common.views['collectData'])
-        elif id == "viewMaps":
+        elif id == "mapIcon":
             pass
-        elif id == "changeSettings":
+        elif id == "settingsIcon":
             manager.push_view(common.views['settings'])
-        elif id == "viewAbout":
+        elif id == "aboutIcon":
             manager.push_view(common.views['about'])
             
     elif event["name"]=="screen":
