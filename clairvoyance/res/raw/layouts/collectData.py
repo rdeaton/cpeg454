@@ -4,20 +4,18 @@ import os
 import json
 from common import droid
 
-settings = {
-     'scan_interval' : 60,
-     'throughput_interval' : 60,
-     'minimum_battery' : 15,
-     'buffer_size' : 5}
+
 
 
 
 def open_view():
-    global settings
+    
     layout = open(os.path.join(common.path, 'layouts', 'collectData.xml'), 'r').read()
     droid.fullShow(layout)
 
     #set the text fields
+    settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
+    
     droid.fullSetProperty("scanInterval", "text", "Current scan interval: " + str(settings['scan_interval']))
     droid.fullSetProperty("throughputInterval", "text", "Current throughput interval: " + str(settings['throughput_interval']))
     droid.fullSetProperty("minimumBattery", "text", "Current minimum battery cutoff: " + str(settings['minimum_battery']))
