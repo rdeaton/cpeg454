@@ -6,8 +6,15 @@ import zipfile
 if __name__ == '__main__':
     path = os.path.dirname(os.path.abspath(__file__))
     # We need to unpackage some things
-    #support = zipfile.ZipFile(os.path.join(path, "support.zip"), 'r')
-    #support.extractall(path)
+    try:
+        support = zipfile.ZipFile(os.path.join(path, "support.zip"), 'r')
+        support.extractall(path)
+    except OSError:
+        import shutil
+        shutil.rmtree(os.path.join(path, 'libs'))
+        shutil.rmtree(os.path.join(path, 'layouts'))
+        support = zipfile.ZipFile(os.path.join(path, "support.zip"), 'r')
+        support.extractall(path)
 
     # Add the librares to our path
     sys.path.insert(0, path + '/libs')
