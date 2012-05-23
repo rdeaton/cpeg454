@@ -4,35 +4,32 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent" android:background="#ff000000">
 
-        
-        <ImageView
-            android:id="@+id/mainLogo"
-            android:layout_width="fill_parent"
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+        <ImageButton
+            android:id="@+id/collectIcon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:layout_gravity="bottom"/>
-        
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
-	    <Button android:id="@+id/collectData" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:text="Start Collecting"></Button>            
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
-	    <Button android:id="@+id/changeSettings" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:text="Change Settings"></Button>            
-            
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
-	    <Button android:id="@+id/viewMaps" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:text="View Coverage Maps"></Button>            
-            
+        <ImageButton
+            android:id="@+id/settingsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="bottom"/>
         </LinearLayout>
         
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
-	    <Button android:id="@+id/viewAbout" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:text="About/Help"></Button>            
-            
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/mapIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:id="@+id/aboutIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="bottom"/>
+         </LinearLayout>
+
+
         
         
 

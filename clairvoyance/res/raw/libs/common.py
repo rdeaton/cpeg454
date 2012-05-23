@@ -5,7 +5,7 @@ droid = None
 # Holds the path to the base directory
 path = ''
 # DNS name of server to report to (no HTTP, url, etc)
-server='localhost:5050'
+server='107.20.202.68:5050'
 gps_locked = False
 
 views = {}

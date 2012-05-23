@@ -6,7 +6,7 @@ import checkin
 from common import droid
 
 
-
+SSIDS_TO_TRACK = ["UDel", "UDel Secure", "acad"]
 
 
 
@@ -86,8 +86,9 @@ def handle_event(event):
         networks = droid.wifiGetScanResults().result
         if networks != None:
             for singleNetwork in networks:
-                handle_event.bufferCounter = handle_event.bufferCounter + 1
-                handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = accuracy))
+                if singleNetwork['ssid'] not in SSIDS_TO_TRACK:
+                    handle_event.bufferCounter = handle_event.bufferCounter + 1
+                    handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = accuracy))
             
         settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)    
         if (handle_event.bufferCounter >= settings['buffer_size']):
@@ -96,7 +97,7 @@ def handle_event(event):
             handle_event.bufferCounter = 0
             handle_event.JSON_sends += 1
         
-        droid.fullSetProperty("status", "text", "Number of reads: " + str(handle_event.bufferCounter) + " Number of JSON sends:" + handle_event.JSON_sends )
+        droid.fullSetProperty("status", "text", "Number of reads: " + str(handle_event.bufferCounter) + " Number of JSON sends:" + str(handle_event.JSON_sends) )
       
         return manager.EVENT_USED
     else:
