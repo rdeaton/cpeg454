@@ -1,8 +1,8 @@
 # Example configuration file. Copy to config.py in the current or parent directory
 
 # Uncomment this for the database type
-db_type = 'mysql'
-#db_type = 'sqlite'
+#db_type = 'mysql'
+db_type = 'sqlite'
 htpath = '.'
 
 sqlite_file = 'db.sqlite'

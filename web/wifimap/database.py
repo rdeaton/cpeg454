@@ -29,7 +29,7 @@ Tables:
 class Checkin(db.Model):
     __tablename__ = 'checkin'
     phone_id = db.Column(db.String(100), db.ForeignKey('phone.id'), primary_key=True)
-    datetime = db.Column(db.DateTime, primary_key=True)
+    datetime = db.Column(db.String(50), primary_key=True)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     ap_bssid = db.Column(db.String(12), db.ForeignKey('ap.bssid'), primary_key=True)
