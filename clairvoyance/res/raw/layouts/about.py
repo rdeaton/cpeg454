@@ -25,7 +25,7 @@ def open_view():
                                            "suffer from poor signal strength and/or network congestion.")
     
     droid.clearOptionsMenu()  
-    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
+    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"ic_menu_close_clear_cancel")
 
     
 
@@ -51,6 +51,7 @@ def handle_event(event):
             #manager.close_app()
             #return manager.EVENT_CONSUME
     elif event["name"] == "EXIT_APP":
+        droid.stopLocating()
         manager.close_app()
     elif event["name"] == "SAVE_SETTINGS":
         save_settings()

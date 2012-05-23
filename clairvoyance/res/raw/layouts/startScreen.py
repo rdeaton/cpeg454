@@ -21,7 +21,7 @@ def open_view():
     if prefs is not None:
         settings = json.loads(prefs)
     droid.clearOptionsMenu()
-    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
+    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"ic_menu_close_clear_cancel")
     
 
 
@@ -39,7 +39,7 @@ def handle_event(event):
         if id == "collectIcon":
             manager.push_view(common.views['collectData'])
         elif id == "mapIcon":
-            pass
+            droid.view("http://107.20.202.68:5052/static/launch.html")
         elif id == "settingsIcon":
             manager.push_view(common.views['settings'])
         elif id == "aboutIcon":
@@ -50,6 +50,7 @@ def handle_event(event):
             # manager.close_app()
             return manager.EVENT_CONSUME
     elif event["name"] == "EXIT_APP":
+        droid.stopLocating()
         manager.close_app()
     else:
         print "Unused event in startScreen."

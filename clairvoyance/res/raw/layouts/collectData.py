@@ -29,7 +29,7 @@ def open_view():
     
     
     droid.clearOptionsMenu()  
-    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
+    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"ic_menu_close_clear_cancel")
 
     #start the gps with the interval that the user has specified in his or her frequency setting
     has_gps_lock = common.gps_lock(mSecondsToWaitOnLock = settings['scan_interval'] * 1000, minUpdateDistance = 1)
@@ -69,6 +69,7 @@ def handle_event(event):
             #manager.close_app()
             return manager.EVENT_USED
     elif event["name"] == "EXIT_APP":
+        droid.stopLocating()
         manager.close_app()
         return manager.EVENT_CONSUME
     elif event["name"] == "SAVE_SETTINGS":

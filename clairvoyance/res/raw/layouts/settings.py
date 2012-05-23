@@ -25,7 +25,7 @@ def open_view():
         settings = common.default_settings
     save_settings() # Updates the UI, and places the defaults in the keystore if nothing was loaded
     droid.clearOptionsMenu()  
-    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
+    droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"ic_menu_close_clear_cancel")
     info = droid.wifiGetConnectionInfo().result
     if 'ssid' in info.keys():
         droid.fullSetProperty("currentNetworkSSID", "text", "Current WiFi Network SSID: " + droid.wifiGetConnectionInfo().result['ssid'])
@@ -91,6 +91,7 @@ def handle_event(event):
             #manager.close_app()
             #return manager.EVENT_CONSUME
     elif event["name"] == "EXIT_APP":
+        droid.stopLocating()
         manager.close_app()
     elif event["name"] == "SAVE_SETTINGS":
         save_settings()
