@@ -37,9 +37,11 @@ def main():
     parser.add_option("-r", "--reset-db", action="store_true", default=False, dest="reset_db", help="Reset the database.")
     parser.add_option("--server",  action="store_true", default=False, dest="start_server", help="Run the test webserver.")
     parser.add_option("--shell", action="store_true", dest="shell", default=False)
+    parser.add_option("--test", action="store_true", dest="test", default=False)
     (options, args) = parser.parse_args()
+    print options
     
-    if options.reset_db or options.start_server:
+    if options.reset_db or options.start_server or options.test:
         # Setup the application and database
         app = Flask(__name__.split('.')[0])
         app.config.from_object(config.FlaskConfig)
@@ -53,6 +55,15 @@ def main():
             #dataset.populate()
             print 'Database reset.'
             exit(0)
+        if options.test:
+            checkins = database.Checkin.query.all()
+            print checkins
+                        
+            
+            
+            exit()
+            
+            
         import pages
         app.run(host='0.0.0.0', port=config.dev_port, use_reloader=True)
     elif options.shell:

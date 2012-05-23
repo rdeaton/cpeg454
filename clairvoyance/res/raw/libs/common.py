@@ -10,6 +10,13 @@ gps_locked = False
 
 views = {}
 
+settings = {
+     'scan_interval' : 60,
+     'throughput_interval' : 60,
+     'minimum_battery' : 15,
+     'buffer_size' : 5}
+
+
 def load_views():
     for f in os.listdir(os.path.join(path, 'layouts')):
         if f[-3:] == '.py' and f != "__init__.py":

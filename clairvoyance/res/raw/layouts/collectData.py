@@ -3,21 +3,21 @@ import common
 import os
 import json
 import checkin
-from common import droid
+from common import droid, default_settings
 
 
 SSIDS_TO_TRACK = ["UDel", "UDel Secure", "acad"]
 
-
-
-
 def open_view():
-
     layout = open(os.path.join(common.path, 'layouts', 'collectData.xml'), 'r').read()
     droid.fullShow(layout)
 
     #set the text fields
-    settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
+    prefs = droid.prefGetValue('settings', 'clairvoyance').result
+    if prefs is not None:
+        settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
+    else:
+        settings = commonn.default_settings
     
     droid.fullSetProperty("scanInterval", "text", "Current scan interval: " + str(settings['scan_interval']))
     droid.fullSetProperty("throughputInterval", "text", "Current throughput interval: " + str(settings['throughput_interval']))

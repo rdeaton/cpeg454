@@ -2,13 +2,8 @@ import manager
 import common
 import os
 import json
-from common import droid
+from common import droid, default_settings
 
-settings = {
-     'scan_interval' : 60,
-     'throughput_interval' : 60,
-     'minimum_battery' : 15,
-     'buffer_size' : 5}
 
 def save_settings():
     droid.fullSetProperty("currentScanInterval", "text", str(settings['scan_interval']) + 's')
@@ -25,6 +20,8 @@ def open_view():
     prefs = droid.prefGetValue('settings', 'clairvoyance').result
     if prefs is not None:
         settings = json.loads(prefs)
+    else:
+        settings = common.default_settings
     save_settings() # Updates the UI, and places the defaults in the keystore if nothing was loaded
     droid.clearOptionsMenu()  
     droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"star_on")
