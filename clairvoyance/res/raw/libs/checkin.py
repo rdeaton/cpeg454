@@ -3,7 +3,7 @@ from datetime import datetime
 import common
 import json
 
-TIMEOUT=2.0
+TIMEOUT=5.0
 """
 checkin format - a list of:
 {
