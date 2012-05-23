@@ -64,32 +64,33 @@ def api_check_in():
     else:
         return jsonify(success='False', failues=failed)
 
-def get_checkins_near_time(dt_value, ssid, mins=15):
-    """
-    returns checkins within 'mins' minutes of datetime
-    for a specific ssid or all SSIDs in case ssid = 'all'
-    """
-    before = dt_value - timedelta(minutes=mins)
-    after = dt_value + timedelta(minutes=mins)
-    if ssid == 'all':
-        #return Checkin.query.all()
-        return Checkin.query.\
-                filter(and_(Checkin.datetime>=before, Checkin.datetime<=after)).all()
-    else:
-        # TODO: currently, return all checkins for debug purposes
-        return Checkin.query.\
-                filter(and_(Checkin.datetime>=before, Checkin.datetime<=after)).\
-                filter(Checkin.ssid.like(ssid)).all()
-
-@app.route('/api/render/', methods=['GET', 'POST'])
-def api_send_render():
-    target_time = datetime.strptime(json.loads(request.form.get('json', None))['datetime'][:18], "%Y-%m-%dT%H:%M:%S")
-    ssid= json.loads(request.form.get('json', None))['ssid']
-    entries = []
-    for c in get_checkins_near_time(target_time, ssid, mins=15):
-        entries.append({'latitude' : c.latitude, 'longitude' : c.longitude,
-                        'ssid' : c.ssid,'signal_strength' : c.signal, 
-                        'performance' : c.performance})
-    #return jsonify(entries)
-    return make_response(json.dumps(entries))
-
+# DEPRECATED!
+#def get_checkins_near_time(dt_value, ssid, mins=15):
+#    """
+#    returns checkins within 'mins' minutes of datetime
+#    for a specific ssid or all SSIDs in case ssid = 'all'
+#    """
+#    before = dt_value - timedelta(minutes=mins)
+#    after = dt_value + timedelta(minutes=mins)
+#    if ssid == 'all':
+#        #return Checkin.query.all()
+#        return Checkin.query.\
+#                filter(and_(Checkin.datetime>=before, Checkin.datetime<=after)).all()
+#    else:
+#        # TODO: currently, return all checkins for debug purposes
+#        return Checkin.query.\
+#                filter(and_(Checkin.datetime>=before, Checkin.datetime<=after)).\
+#                filter(Checkin.ssid.like(ssid)).all()
+#
+#@app.route('/api/render/', methods=['GET', 'POST'])
+#def api_send_render():
+#    target_time = datetime.strptime(json.loads(request.form.get('json', None))['datetime'][:18], "%Y-%m-%dT%H:%M:%S")
+#    ssid= json.loads(request.form.get('json', None))['ssid']
+#    entries = []
+#    for c in get_checkins_near_time(target_time, ssid, mins=15):
+#        entries.append({'latitude' : c.latitude, 'longitude' : c.longitude,
+#                        'ssid' : c.ssid,'signal_strength' : c.signal, 
+#                        'performance' : c.performance})
+#    #return jsonify(entries)
+#    return make_response(json.dumps(entries))
+#
