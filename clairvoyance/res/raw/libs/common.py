@@ -10,9 +10,8 @@ gps_locked = False
 
 views = {}
 
-settings = {
+default_settings = {
      'scan_interval' : 60,
-     'throughput_interval' : 60,
      'minimum_battery' : 15,
      'buffer_size' : 5}
 

@@ -5,8 +5,8 @@
         android:layout_height="match_parent" android:background="#ff000000">
 
 
-        <CheckBox android:layout_height="wrap_content" android:id="@+id/scanEnable" android:layout_width="234dp" android:text="Enable Scan Tests?" android:checked="true"></CheckBox>   
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
 	    <Button android:id="@+id/openScanSlider" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="Change Scan Interval"></Button>            
             <TextView android:layout_width="match_parent"
@@ -14,16 +14,8 @@
                     android:id="@+id/currentScanInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
         </LinearLayout>
 
-        <CheckBox android:layout_height="wrap_content" android:id="@+id/throughputEnable" android:layout_width="234dp" android:text="Enable Throughput Tests?" android:checked="true"></CheckBox>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
-	    <Button android:id="@+id/openThroughputSlider" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:text="Change Throughput Test Interval"></Button>            
-            <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:text="30"
-                    android:id="@+id/currentThroughputInterval" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="right"></TextView>
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
 	    <Button android:id="@+id/minimumBattery" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="Minimum Battery Level"></Button>            
             <TextView android:layout_width="match_parent"
@@ -32,7 +24,7 @@
         </LinearLayout>
 
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout6">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
 	    <Button android:id="@+id/bufferSizeSlider" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="Change the buffer size."></Button>            
             <TextView android:layout_width="match_parent"
@@ -41,7 +33,7 @@
         </LinearLayout>
 
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
 	    <TextView android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:text="none"
                     android:id="@+id/currentNetworkSSID" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>
