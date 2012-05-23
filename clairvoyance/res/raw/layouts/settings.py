@@ -6,7 +6,7 @@ from common import droid, default_settings
 
 
 def save_settings():
-    droid.fullSetProperty("currentScanInterval", "text", str(settings['scan_interval']) + 'seconds')
+    droid.fullSetProperty("currentScanInterval", "text", str(settings['scan_interval']) + ' seconds')
     droid.fullSetProperty("currentMinimumBattery", "text", str(settings['minimum_battery']) + "%")       
     droid.fullSetProperty("bufferSize", "text", str(settings['buffer_size']))       
     droid.prefPutValue('settings', json.dumps(settings), 'clairvoyance')
