@@ -5,27 +5,45 @@
         android:layout_height="match_parent" android:background="#ff000000">
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
+         <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:textSize="30sp"
+                    android:id="@+id/Title" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" 
+                    android:text="Clairvoyance"/>  
+        </LinearLayout>
+        
+         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
+         <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:textSize="10sp"
+                    android:id="@+id/Title" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" 
+                    android:text="UD WiFi Logging Tool"/>  
+        </LinearLayout>
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
         <ImageButton
             android:id="@+id/collectIcon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
+            android:background="#ff000000"
             android:layout_gravity="bottom"/>
         <ImageButton
             android:id="@+id/settingsIcon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
+            android:background="#ff000000"
             android:layout_gravity="bottom"/>
         </LinearLayout>
         
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
         <ImageButton
             android:id="@+id/mapIcon"
             android:layout_width="wrap_content"
+            android:background="#ff000000"
             android:layout_height="wrap_content" />
         <ImageButton
             android:id="@+id/aboutIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
+            android:background="#ff000000"
             android:layout_gravity="bottom"/>
          </LinearLayout>
 
