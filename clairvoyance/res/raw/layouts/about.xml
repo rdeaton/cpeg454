@@ -8,14 +8,14 @@
         
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout1">
             <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:textSize="30sp"
+                    android:layout_height="wrap_content" android:textSize="30sp" android:textStyle="bold"
                     android:id="@+id/Title" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center"></TextView>         
         </LinearLayout>
         
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2">
             <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:textSize="20sp" android:textStyle="bold"
-                    android:id="@+id/DevsTitle"  android:gravity="center"></TextView>         
+                    android:layout_height="wrap_content" android:textSize="20sp" 
+                    android:id="@+id/DevsTitle"  android:gravity="left"></TextView>         
         </LinearLayout>
         
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout3">
@@ -27,7 +27,7 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout4">
               <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content" android:textSize="20sp"
-                      android:id="@+id/infoTitle" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center"></TextView>         
+                      android:id="@+id/infoTitle" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>         
           </LinearLayout>
 
           <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout5">
@@ -37,4 +37,14 @@
             </LinearLayout>
  
 
+           <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout6">
+                <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="20sp"
+                        android:id="@+id/ackTitle" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>         
+            </LinearLayout>
+                      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout7">
+                <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="10sp"
+                        android:id="@+id/ackInfo" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left"></TextView>         
+            </LinearLayout>
 </LinearLayout>

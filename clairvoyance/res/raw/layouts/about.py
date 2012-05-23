@@ -24,6 +24,8 @@ def open_view():
                                            "This data will be used to construct a heatmap that will allow administrators to see which areas " +
                                            "suffer from poor signal strength and/or network congestion.")
     
+    droid.fullSetProperty("ackTitle", "text", "Acknowledgements")
+    droid.fullSetProperty("ackInfo", "text", "The free image icons for this project were obtained from http://www.iconspedia.com/search/android/.")
     droid.clearOptionsMenu()  
     droid.addOptionsMenuItem("Close Application","EXIT_APP",None,"ic_menu_close_clear_cancel")
 
