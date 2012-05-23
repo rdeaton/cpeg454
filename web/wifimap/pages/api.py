@@ -46,12 +46,15 @@ def api_check_in():
 
             if AP.query.filter_by(bssid=e['bssid']).all() is not None:
                 db.session.add(AP(bssid=e['bssid'], ssid=e['ssid']))
+                db.session.commit()
             
             if Network.query.filter_by(_ssid=e['ssid']).all() is not None:
                 db.session.add(Network(ssid=e['ssid']))
+                db.session.commit()
             
             if Phone.query.filter_by(id=e['phone_id']).all() is not None:
                 db.session.add(Phone(id=e['phone_id']))
+                db.session.commit()
         else:
             failed += 1
     db.session.commit()
