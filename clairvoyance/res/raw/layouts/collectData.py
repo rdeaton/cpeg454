@@ -60,7 +60,7 @@ def handle_event(event):
         #BACK_BUTTON = '4'
         if id == '4':
             #the back button was pressed
-            print "BACK BUTTON PRESSED!!!"
+            droid.stopLocating()
             manager.pop_view();
             return manager.EVENT_CONSUME
     elif event["name"]=="screen":

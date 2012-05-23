@@ -10,7 +10,7 @@ gps_locked = False
 
 
 
-SSIDS_TO_TRACK = ["UDel", "UDel Secure", "acad"]
+SSIDS_TO_TRACK = ["UDel", "UDel Secure"]
 
 
 views = {}
