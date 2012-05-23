@@ -119,7 +119,7 @@ def handle_event(event):
             
 
         except Exception:
-            print "GPS read error"
+            droid.fullSetProperty("status", "text", "NO GPS LOCK")
         return manager.EVENT_CONSUME
     else:
         print "Unused event in collectData."
