@@ -17,7 +17,7 @@ def open_view():
     if prefs is not None:
         settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
     else:
-        settings = commonn.default_settings
+        settings = common.default_settings
     
     droid.fullSetProperty("scanInterval", "text", "Current scan interval: " + str(settings['scan_interval']))
     droid.fullSetProperty("minimumBattery", "text", "Current minimum battery cutoff: " + str(settings['minimum_battery']))
@@ -78,7 +78,11 @@ def handle_event(event):
         return manager.EVENT_USED
     elif event["name"] == "battery":
         #if battery level is below the minimum, then stop locating and set the low battery warning!
-        settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)    
+        prefs = droid.prefGetValue('settings', 'clairvoyance').result
+        if prefs is not None:
+            settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
+        else:
+            settings = common.default_settings
         if (droid.batteryGetLevel().result < int(settings['minimum_battery'])):
             droid.stopLocating()
             droid.fullSetProperty("status", "text", "Battery level too low.  Please charge the device and try again (or change the minimum battery level in settings)." )
@@ -103,7 +107,7 @@ def handle_event(event):
             else:
                 handle_event.odd = False
                 
-            settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)    
+            settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
             if (handle_event.bufferCounter >= settings['buffer_size']):
                 try:
                     checkin.send_checkins(handle_event.location)
