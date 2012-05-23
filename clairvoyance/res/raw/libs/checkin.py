@@ -2,6 +2,8 @@ import requests
 from datetime import datetime
 import common
 import json
+
+TIMEOUT=2.0
 """
 checkin format - a list of:
 {
@@ -42,13 +44,13 @@ def send_checkins(checkins_list):
     url = 'http://%s/api/checkin/' % common.server
     payload = {}
     payload['json'] = json.dumps(checkins_list)
-    r = requests.post(url, data=payload)
+    r = requests.post(url, data=payload, timeout=TIMEOUT)
 
 def get_render_data(ssid='all', datetime=datetime.now().isoformat()):
     url = 'http://%s/api/render/' % common.server
     payload = {}
     payload['json'] = json.dumps({'ssid':ssid, 'datetime':datetime})
-    get = requests.post(url, data=payload)
+    get = requests.post(url, data=payload, timeout=TIMEOUT)
     return get.json
 
 if __name__ == '__main__':

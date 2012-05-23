@@ -6,8 +6,8 @@ from common import droid, default_settings
 
 
 def save_settings():
-    droid.fullSetProperty("currentScanInterval", "text", str(settings['scan_interval']) + 's')
-    droid.fullSetProperty("currentMinimumBattery", "text", str(settings['minimum_battery']))       
+    droid.fullSetProperty("currentScanInterval", "text", str(settings['scan_interval']) + 'seconds')
+    droid.fullSetProperty("currentMinimumBattery", "text", str(settings['minimum_battery']) + "%")       
     droid.fullSetProperty("bufferSize", "text", str(settings['buffer_size']))       
     droid.prefPutValue('settings', json.dumps(settings), 'clairvoyance')
 
@@ -67,7 +67,7 @@ def handle_event(event):
             return manager.EVENT_CONSUME
         elif id == "bufferSizeSlider":
               droid.dialogCreateSeekBar(str(settings['buffer_size']), 50, "Buffer Size", "How often should the app send its collected data to the server?  Decreasing this size will send data to the server more often (though the same amount of total data will be sent).")
-              droid.dialogSetPositiveButtonText("Update Buffer Size")
+              droid.dialogSetPositiveButtonText("Update Buffer Limit")
               droid.dialogShow()
               sliderResp = droid.dialogGetResponse().result
               valToSet = sliderResp['progress']

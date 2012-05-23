@@ -19,9 +19,9 @@ def open_view():
     else:
         settings = common.default_settings
     
-    droid.fullSetProperty("scanInterval", "text", "Current scan interval: " + str(settings['scan_interval']))
-    droid.fullSetProperty("minimumBattery", "text", "Current minimum battery cutoff: " + str(settings['minimum_battery']))
-    droid.fullSetProperty("bufferSize", "text", "Current buffer size: " + str(settings['buffer_size']))
+    droid.fullSetProperty("scanInterval", "text", "Scan interval: " + str(settings['scan_interval']) + " seconds")
+    droid.fullSetProperty("minimumBattery", "text", "Minimum battery cutoff: " + str(settings['minimum_battery']) + "%")
+    droid.fullSetProperty("bufferSize", "text", "Buffer limit: " + str(settings['buffer_size']))
     currentAP = droid.wifiGetConnectionInfo().result
     print currentAP['network_id']
     if currentAP['network_id'] != -1:
@@ -86,10 +86,10 @@ def handle_event(event):
         if (droid.batteryGetLevel().result < int(settings['minimum_battery'])):
             droid.stopLocating()
             droid.fullSetProperty("status", "text", "Battery level too low.  Please charge the device and try again (or change the minimum battery level in settings)." )
-    elif event["name"] == "location":
-          
 
+    elif event["name"] == "location":
         loc_data = droid.readLocation().result
+        
         try:
             myLat = loc_data['gps']['latitude']
             myLong = loc_data['gps']['longitude']
@@ -98,25 +98,27 @@ def handle_event(event):
             networks = droid.wifiGetScanResults().result
             if networks != None and handle_event.odd == False:
                 handle_event.odd = True
-                handle_event.odd = True
                 for singleNetwork in networks:
                     if singleNetwork['ssid'] not in SSIDS_TO_TRACK:
                         handle_event.totalPointsCollected += 1
                         handle_event.bufferCounter = handle_event.bufferCounter + 1
                         handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = accuracy))
-            else:
+            elif networks != None:
                 handle_event.odd = False
-                
+
+            
             settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)
-            if (handle_event.bufferCounter >= settings['buffer_size']):
+            
+            if (handle_event.bufferCounter >= settings['buffer_size'] and handle_event.odd == True):
                 try:
                     checkin.send_checkins(handle_event.location)
-                except Exception:
-                    droid.makeToast("Server did not acknowledge receipt of object.")
+                    handle_event.location = []
+                    handle_event.bufferCounter = 0
+                    handle_event.JSON_sends += 1
                     
-                handle_event.location = []
-                handle_event.bufferCounter = 0
-                handle_event.JSON_sends += 1
+                except Exception,e:
+                    droid.makeToast("Error: " + str(e))
+                    
             
             droid.fullSetProperty("status", "text", "Total number of data points collected: " + str(handle_event.totalPointsCollected) + "\nCurrent buffer size: " + str(handle_event.bufferCounter) + "\nNumber of JSON sends to server: " + str(handle_event.JSON_sends) )
             
