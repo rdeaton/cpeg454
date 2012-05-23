@@ -38,8 +38,10 @@ class Checkin(db.Model):
     performance = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<Checkin %s, %s, %s>' % \
-                (str(self.phone_id), str(self.datetime), str(self.ap_bssid))
+        return '<Checkin %s, %s, %s, %s, %s, %s, %s>' % \
+                ( str(self.phone_id), str(self.datetime), \
+                  str(self.latitude), str(self.longitude),\
+                  str(self.ap_bssid), str(self.ssid), str(self.signal) )
 
 class AP(db.Model):
     __tablename__ = 'ap'
