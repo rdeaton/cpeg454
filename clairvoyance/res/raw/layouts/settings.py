@@ -5,6 +5,8 @@ import json
 from common import droid, default_settings
 
 
+MINIMUM_UPDATE = 15
+
 def save_settings():
     droid.fullSetProperty("currentScanInterval", "text", str(settings['scan_interval']) + ' seconds')
     droid.fullSetProperty("currentMinimumBattery", "text", str(settings['minimum_battery']) + "%")       
@@ -51,7 +53,7 @@ def handle_event(event):
             droid.dialogShow()
             sliderResp = droid.dialogGetResponse().result
             valToSet = sliderResp['progress']
-            if valToSet == 0: valToSet = 1
+            if valToSet <= MINIMUM_UPDATE: valToSet = MINIMUM_UPDATE
             settings['scan_interval'] = valToSet
             save_settings()
             return manager.EVENT_CONSUME

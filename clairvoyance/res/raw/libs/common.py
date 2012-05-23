@@ -8,6 +8,11 @@ path = ''
 server='107.20.202.68:5050'
 gps_locked = False
 
+
+
+SSIDS_TO_TRACK = ["UDel", "UDel Secure", "acad"]
+
+
 views = {}
 
 default_settings = {

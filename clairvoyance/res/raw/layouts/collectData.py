@@ -3,10 +3,8 @@ import common
 import os
 import json
 import checkin
-from common import droid, default_settings
+from common import droid, default_settings, SSIDS_TO_TRACK
 
-
-SSIDS_TO_TRACK = ["UDel", "UDel Secure", "acad"]
 
 def open_view():
     layout = open(os.path.join(common.path, 'layouts', 'collectData.xml'), 'r').read()
@@ -99,7 +97,7 @@ def handle_event(event):
             if networks != None and handle_event.odd == False:
                 handle_event.odd = True
                 for singleNetwork in networks:
-                    if singleNetwork['ssid'] not in SSIDS_TO_TRACK:
+                    if singleNetwork['ssid'] in common.SSIDS_TO_TRACK:
                         handle_event.totalPointsCollected += 1
                         handle_event.bufferCounter = handle_event.bufferCounter + 1
                         handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = accuracy))
