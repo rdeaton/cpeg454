@@ -55,4 +55,5 @@ def handle_event(event):
     elif event["name"] == "SAVE_SETTINGS":
         save_settings()
     else:
+        print "Unused event in about."
         return manager.EVENT_UNUSED

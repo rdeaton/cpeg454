@@ -27,11 +27,12 @@ rendering format - a list of:
 
 __all__ = ['create_checkin', 'send_checkins', 'get_render_data']
 
-def create_checkin(phone_id=None, datetime=datetime.now().isoformat(), 
+def create_checkin(phone_id=None, dt=None, 
         latitude=None, longitude=None, bssid=None, ssid=None,
         signal=None, performance=None):
-
-    return dict(phone_id=phone_id, datetime=datetime, \
+    if dt == None:
+        dt = datetime.now().isoformat()
+    return dict(phone_id=phone_id, datetime=dt, \
                    latitude=latitude, longitude=longitude, \
                    bssid=bssid, ssid=ssid, signal=signal, \
                    performance=performance)

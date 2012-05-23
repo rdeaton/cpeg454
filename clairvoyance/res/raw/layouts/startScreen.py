@@ -51,6 +51,6 @@ def handle_event(event):
             return manager.EVENT_CONSUME
     elif event["name"] == "EXIT_APP":
         manager.close_app()
-    
-    
-    return manager.EVENT_UNUSED
+    else:
+        print "Unused event in startScreen."
+        return manager.EVENT_UNUSED

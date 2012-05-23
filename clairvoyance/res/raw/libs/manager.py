@@ -55,9 +55,9 @@ def main_loop():
         used = False
         for handler in event_handlers:
             r = handler(event)
-            if EVENT_CONSUME:
+            if r==EVENT_CONSUME:
                 continue
-            if EVENT_USED:
+            if r==EVENT_USED:
                 used = True
         if used is False:
             print 'UNUSED EVENT: ' + str(event)

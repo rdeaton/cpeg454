@@ -45,7 +45,7 @@ def open_view():
     handle_event.bufferCounter = 0
     handle_event.location = []
     handle_event.JSON_sends = 0
-
+    handle_event.odd = False
 def close_view():
     droid.fullDismiss()
 
@@ -76,7 +76,7 @@ def handle_event(event):
         save_settings()
         return manager.EVENT_USED
     elif event["name"] == "location":
-        print "GOT LOC!"
+        print "GOT LOC!"    
 
         loc_data = droid.readLocation().result
         myLat = loc_data['gps']['latitude']
@@ -84,22 +84,31 @@ def handle_event(event):
         accuracy = loc_data['gps']['accuracy']
         myID = droid.getDeviceId().result
         networks = droid.wifiGetScanResults().result
-        if networks != None:
+        if networks != None and handle_event.odd == False:
+            handle_event.odd = True
+            handle_event.odd = True
             for singleNetwork in networks:
                 if singleNetwork['ssid'] not in SSIDS_TO_TRACK:
                     handle_event.bufferCounter = handle_event.bufferCounter + 1
                     handle_event.location.append(checkin.create_checkin(phone_id = myID , latitude = myLat , longitude = myLong, bssid = singleNetwork['bssid'], ssid = singleNetwork['ssid'] , signal = singleNetwork['level'] , performance = accuracy))
+        else:
+            handle_event.odd = False
             
         settings = json.loads(droid.prefGetValue('settings','clairvoyance').result)    
         if (handle_event.bufferCounter >= settings['buffer_size']):
-            checkin.send_checkins(handle_event.location)
+            try:
+                checkin.send_checkins(handle_event.location)
+            except Exception:
+                droid.makeToast("Server did not acknowledge receipt of object.")
+                
             handle_event.location = []
             handle_event.bufferCounter = 0
             handle_event.JSON_sends += 1
         
         droid.fullSetProperty("status", "text", "Number of reads: " + str(handle_event.bufferCounter) + " Number of JSON sends:" + str(handle_event.JSON_sends) )
       
-        return manager.EVENT_USED
+        return manager.EVENT_CONSUME
     else:
+        print "Unused event in collectData."
         return manager.EVENT_UNUSED
         
