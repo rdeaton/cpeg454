@@ -1,7 +1,7 @@
 # This file really needs a better name. We'll discuss later
 from wifimap import db, config
 import sqlalchemy
-from flaskext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 from collections import defaultdict
 from sqlalchemy.sql.expression import asc
 from datetime import datetime
@@ -29,7 +29,7 @@ Tables:
 class Checkin(db.Model):
     __tablename__ = 'checkin'
     phone_id = db.Column(db.String(100), db.ForeignKey('phone.id'), primary_key=True)
-    datetime = db.Column(db.DateTime, primary_key=True)
+    datetime = db.Column(db.String(50), primary_key=True)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     ap_bssid = db.Column(db.String(12), db.ForeignKey('ap.bssid'), primary_key=True)
@@ -38,8 +38,10 @@ class Checkin(db.Model):
     performance = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<Checkin %s, %s, %s>' % \
-                (str(self.phone_id), str(self.datetime), str(self.ap_bssid))
+        return '<Checkin %s, %s, %s, %s, %s, %s, %s>' % \
+                ( str(self.phone_id), str(self.datetime), \
+                  str(self.latitude), str(self.longitude),\
+                  str(self.ap_bssid), str(self.ssid), str(self.signal) )
 
 class AP(db.Model):
     __tablename__ = 'ap'

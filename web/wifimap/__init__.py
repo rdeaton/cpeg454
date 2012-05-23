@@ -11,7 +11,7 @@ the basic setup code to run the application under any condition.
 
 | *app* is an instance of flask.Flask() which is to handling the application.
 | *config* is the imported config module.
-| *db* is an instance of flaskext.sqlalchemy.SQLAlchemy which is used for all
+| *db* is an instance of flask.ext.sqlalchemy.SQLAlchemy which is used for all
   database configuration and querying.
 | *database* is the imported database module. This in particular must be imported
   only from the name wifimap.database, as it relies on this code having been
@@ -19,7 +19,7 @@ the basic setup code to run the application under any condition.
 """
 
 from flask import Flask, render_template
-from flaskext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 from optparse import OptionParser
 import config
 import sys
