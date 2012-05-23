@@ -92,6 +92,11 @@ def handle_event(event):
             myLat = loc_data['gps']['latitude']
             myLong = loc_data['gps']['longitude']
             accuracy = loc_data['gps']['accuracy']
+            
+            if droid.checkWifiState().result == False:
+                droid.makeToast("WiFi was not enabled.  Enabling WiFi..."
+                droid.toggleWifiState(True)
+                                
             myID = droid.getDeviceId().result
             networks = droid.wifiGetScanResults().result
             if networks != None and handle_event.odd == False:

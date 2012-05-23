@@ -41,7 +41,9 @@ if __name__ == '__main__':
     common.load_views()
     import manager
 
-
+    if droid.checkWifiState().result == False:
+        droid.makeToast("WiFi was not enabled.  Enabling WiFi..."
+        droid.toggleWifiState(True)
     # Turn on GPS at app startup
     #common.gps_lock()
     manager.push_view(common.views['startScreen'])
