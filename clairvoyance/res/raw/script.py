@@ -42,7 +42,7 @@ if __name__ == '__main__':
     import manager
 
     if droid.checkWifiState().result == False:
-        droid.makeToast("WiFi was not enabled.  Enabling WiFi..."
+        droid.makeToast("WiFi was not enabled.  Enabling WiFi...")
         droid.toggleWifiState(True)
     # Turn on GPS at app startup
     #common.gps_lock()

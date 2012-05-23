@@ -94,7 +94,7 @@ def handle_event(event):
             accuracy = loc_data['gps']['accuracy']
             
             if droid.checkWifiState().result == False:
-                droid.makeToast("WiFi was not enabled.  Enabling WiFi..."
+                droid.makeToast("WiFi was not enabled.  Enabling WiFi...")
                 droid.toggleWifiState(True)
                                 
             myID = droid.getDeviceId().result
